@@ -14,8 +14,9 @@ $('.delete-team').click(function(e){
 $('.put-form').on('submit', function(e) {
   e.preventDefault();
   var teamElement = $(this);
+  console.log(teamElement);
   
-  var teamUrl = teamElement.attr('action');
+  var teamUrl = teamElement.attr('href');
   var teamData = teamElement.serialize();
   console.log(teamUrl);
   console.log(teamData);
@@ -23,15 +24,8 @@ $('.put-form').on('submit', function(e) {
     method: 'PUT',
     url: teamUrl,
     data: teamData
-  }).done(function(data) {
-    // get data returned from the PUT route
-    console.log(data);
+   }).done(function(data){
+		window.location.href = '/teams';
+	});
 
-    // do stuff when the PUT action is complete
-    //editTeam(data.name, data.members);
-    //teamElement.remove();
-
-    // or, you can redirect to another page
-    window.location = '/teams';
-  });
 });

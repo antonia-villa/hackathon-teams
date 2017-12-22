@@ -32,10 +32,10 @@ router.delete('/:name', function(req, res){
 router.put('/edit/:name', function(req, res) {
   var teamToEdit = req.params.name;
   var teamMembers = req.params.members;
-  console.log(teamToEdit);
-  console.log(teamMembers);
+  console.log('team name', teamToEdit);
+  console.log('team data', teamMembers);
 
- 
+ console.log(teamData);
 
   // Edit team here
 
