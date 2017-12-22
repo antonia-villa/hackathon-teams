@@ -8,6 +8,11 @@ router.get('/', function(req, res) {
   res.render('teams/index', { teams: teams });
 });
 
+router.get('/edit/:name', function(req, res) {
+  var team = teamService.getTeam(req.params.name);
+  res.render('teams/edit', { team: team });
+});
+
 // Add Teams to page
 router.post('/', function(req, res) {
   teamService.addTeam(req.body);
@@ -23,6 +28,23 @@ router.delete('/:name', function(req, res){
 	res.send('success');
 
 })
+
+router.put('/edit/:name', function(req, res) {
+  var teamToEdit = req.params.name;
+  var teamMembers = req.params.members;
+  console.log(teamToEdit);
+  console.log(teamMembers);
+
+ 
+
+  // Edit team here
+
+  /*
+   * instead of rendering a page, send back JSON or text, which can be read
+   * in the .done() promise of the AJAX call
+   */
+  res.send({message: 'success'});
+});
 
 router.get('/new', function(req, res) {
   res.render('teams/new');
