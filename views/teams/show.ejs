@@ -5,4 +5,13 @@
 	<p>
 	  <%= team.members %>
 	</p>
+	<div class = "buttonsContainer">
+		<a href="/teams/edit/<%=team.name%>">
+			Edit Team
+		</a>
+		<a href="/teams/<%=team.name%>" class = "btn btn-danger delete-team">
+			Delete Team
+		</a>
+	</div>
 </div>
+

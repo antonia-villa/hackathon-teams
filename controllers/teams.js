@@ -8,10 +8,6 @@ router.get('/', function(req, res) {
   res.render('teams/index', { teams: teams });
 });
 
-router.get('/edit/:name', function(req, res) {
-  var team = teamService.getTeam(req.params.name);
-  res.render('teams/edit', { team: team });
-});
 
 // Add Teams to page
 router.post('/', function(req, res) {
@@ -20,34 +16,14 @@ router.post('/', function(req, res) {
   res.redirect('/teams');
 });
 
-
-router.delete('/:name', function(req, res){
-	console.log('Delete route. name = ', req.params.name);
-	teamService.deleteTeam(req.params.name)
-	// 	console.log('delted = ', deleted);
-	res.send('success');
-
-})
-
-router.put('/edit/:name', function(req, res) {
-  var teamToEdit = req.params.name;
-  var teamMembers = req.params.members;
-  console.log('team name', teamToEdit);
-  console.log('team data', teamMembers);
-
- console.log(teamData);
-
-  // Edit team here
-
-  /*
-   * instead of rendering a page, send back JSON or text, which can be read
-   * in the .done() promise of the AJAX call
-   */
-  res.send({message: 'success'});
-});
-
 router.get('/new', function(req, res) {
   res.render('teams/new');
+});
+
+router.get('/edit/:name', function(req, res) {
+// console.log('edit form');
+  var team = teamService.getTeam(req.params.name);
+  res.render('teams/edit', { team: team });
 });
 
 router.get('/:name', function(req, res) {
@@ -56,5 +32,17 @@ router.get('/:name', function(req, res) {
 
   res.render('teams/show', { team: team });
 });
+
+router.put('/:name', function(req, res) {
+ teamService.editTeam(req.params.name, req.body);
+ //console.log(req.body);
+  res.send('PUT ROUTE');
+});
+
+router.delete('/:name', function(req, res){
+	teamService.deleteTeam(req.params.name)
+	res.send('success');
+
+})
 
 module.exports = router;
